@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="id.ac.polinema.intentexercise"
     >
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"

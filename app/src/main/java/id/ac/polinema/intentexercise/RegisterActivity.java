@@ -39,7 +39,7 @@ public class RegisterActivity extends AppCompatActivity  implements Validator.Va
     private TextInputEditText fullnameInput;
     @Email
     private TextInputEditText emailInput;
-    @Password(min = 6, scheme = Password.Scheme.ALPHA_NUMERIC_MIXED_CASE_SYMBOLS)
+    @Password
     private TextInputEditText passwordInput;
     @ConfirmPassword
     private TextInputEditText confirmPassword;
@@ -66,18 +66,9 @@ public class RegisterActivity extends AppCompatActivity  implements Validator.Va
     }
 
     public void handleOk(View view) {
+        validator.validate();
 
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 50, baos);
 
-    Intent intent = new Intent(this, ProfileActivity.class );
-    intent.putExtra(USER_KEY,new UserModel(fullnameInput.getText().toString(),
-                                            emailInput.getText().toString(),
-                                            passwordInput.getText().toString(),
-                                            homepageInput.getText().toString(),
-                                            aboutInput.getText().toString()));
-    intent.putExtra("profileImage",baos.toByteArray());
-    startActivity(intent);
 }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -109,11 +100,33 @@ public class RegisterActivity extends AppCompatActivity  implements Validator.Va
 
     @Override
     public void onValidationSucceeded() {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 50, baos);
+
+        Intent intent = new Intent(this, ProfileActivity.class );
+        intent.putExtra(USER_KEY,new UserModel(fullnameInput.getText().toString(),
+                emailInput.getText().toString(),
+                passwordInput.getText().toString(),
+                homepageInput.getText().toString(),
+                aboutInput.getText().toString()));
+        intent.putExtra("profileImage",baos.toByteArray());
+        startActivity(intent);
 
     }
 
     @Override
     public void onValidationFailed(List<ValidationError> errors) {
+        for (ValidationError error : errors) {
+            View view = error.getView();
+            String message = error.getCollatedErrorMessage(this);
+
+            // Display error messages ;)
+            if (view instanceof EditText) {
+                ((EditText) view).setError(message);
+            } else {
+                Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+            }
+        }
 
     }
 }

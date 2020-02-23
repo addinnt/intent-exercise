@@ -170,9 +170,9 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/futura_pt_demibold"
-            android:text="Email"
+            android:text="Homepage"
             android:textAlignment="textStart"
-            android:textSize="20sp"
+            android:textSize="18sp"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/separator3"
@@ -220,6 +220,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/separator4"
+            android:onClick="handleHomepage"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
