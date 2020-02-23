@@ -19,6 +19,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.ConfirmPassword;
+import com.mobsandgeeks.saripaar.annotation.Domain;
 import com.mobsandgeeks.saripaar.annotation.Email;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 import com.mobsandgeeks.saripaar.annotation.Password;
@@ -43,6 +44,7 @@ public class RegisterActivity extends AppCompatActivity  implements Validator.Va
     private TextInputEditText passwordInput;
     @ConfirmPassword
     private TextInputEditText confirmPassword;
+    @Domain
     private TextInputEditText homepageInput;
     private TextInputEditText aboutInput;
     private ImageView image_profile;

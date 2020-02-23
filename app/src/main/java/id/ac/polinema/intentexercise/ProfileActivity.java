@@ -48,16 +48,20 @@ public class ProfileActivity extends AppCompatActivity {
             Bitmap bmp = BitmapFactory.decodeByteArray(getIntent().getByteArrayExtra("profileImage"), 0, getIntent().getByteArrayExtra("profileImage").length);
             imageProfile.setImageBitmap(bmp);
 
-
-            // TODO: display value here
         }
     }
 
     public void handleHomepage(View view) {
         String url = homepage.getText().toString();
 
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-        startActivity(intent);
+        //cek http
+        if (!url.startsWith("https://") && !url.startsWith("http://")){
+            url = "http://" + url;
+        }
+        Intent openUrlIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        if (openUrlIntent.resolveActivity(getPackageManager()) != null) {
+            startActivity(openUrlIntent);
+        }
 
     }
 }
